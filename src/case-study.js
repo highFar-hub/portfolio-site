@@ -316,15 +316,17 @@ const frameLabels = ['概念草图 / CONCEPT','叙事结构 / NARRATIVE','系统
 const frameDescriptions = ['从问题与叙事关系出发，确认作品最初的体验方向。','梳理信息、角色与体验节奏之间的关系。','把输入、反馈与输出拆解成可测试的实时系统。','记录观众进入系统后的触发、停留与反馈状态。','在真实展示环境中校准空间、画面与观看距离。','观察装置、身体与环境之间的即时关系。','保留画面在不同参数下的视觉变化。','测试动态反馈如何回应观众动作。','校准界面信息在实际体验中的可读性。','记录建模、材质与实时渲染的取舍。','保留迭代中的版本、失败样本与下一步假设。','汇总完成版本与后续可继续发展的线索。'];
 const dots = document.querySelector('#gallery-dots');
 const galleryCaption = document.querySelector('#gallery-caption');
-// Project 05 uses the provided DOM + CSS + GSAP infinite-gallery implementation.
+// Project 05 uses a self-contained Three.js corridor with local project imagery.
 const useLabCorridor = true;
 if (useLabCorridor && projectId === '5') {
   document.body.classList.add('case-page--lab');
   gallerySection.classList.add('case-gallery--lab');
-  gallery.innerHTML = '<div class="infinite-lab" data-lab-gallery></div>';
+  gallery.innerHTML = '<div class="lab-corridor" data-lab-corridor><canvas aria-label="实验室作品图像走廊"></canvas><p>EXPERIMENTAL ARCHIVE / 14 STUDIES</p><small>MOVE TO LOOK AROUND</small></div>';
   dots.innerHTML = '';
   galleryCaption.textContent = '';
-  window.LabGallery?.mount(gallery.querySelector('[data-lab-gallery]'));
+  const mountLabCorridor = () => startLabCorridor(gallery.querySelector('[data-lab-corridor]'));
+  if (window.THREE) mountLabCorridor();
+  else window.addEventListener('three-ready', mountLabCorridor, { once:true });
 } else {
 // One dedicated 12-frame sequence per project. Add images as img/{projectId}/1.webp … 12.webp.
   gallery.innerHTML = frameLabels.map((label, index) => `<button class="cover-card" type="button" data-card="${index}" aria-label="查看 ${label}"><img src="./img/${projectId}/${index + 1}.webp" alt="${project.title} ${label}"></button>`).join('');
@@ -415,14 +417,14 @@ function startLabCorridor(root) {
   const paper = new THREE.MeshBasicMaterial({ color:'#eeece3', side:THREE.DoubleSide });
   const panelGeometry = new THREE.PlaneGeometry(1.58, 1.58);
   const frameGeometry = new THREE.EdgesGeometry(panelGeometry);
-  for (let i = 0; i < 46; i += 1) {
-    const t = (i / 46 + .028 + ((i * 17) % 11) * .0012) % 1;
+  for (let i = 0; i < 64; i += 1) {
+    const t = (i / 64 + .028 + ((i * 17) % 11) * .0012) % 1;
     const side = i % 3 === 0 ? -1 : 1;
     const level = ((i * 7) % 10) / 10 - .45;
     const frame = sampleFrame(t);
     const material = new THREE.MeshBasicMaterial({ color:'#e8e5dc', side:THREE.DoubleSide });
     loader.load(
-      `./img/5/${(i % 10) + 1}.webp`,
+      `./img/5/${(i % 14) + 1}.webp`,
       (texture) => { texture.colorSpace = THREE.SRGBColorSpace; material.map = texture; material.needsUpdate = true; },
       undefined,
       () => { material.map = null; material.color.set('#e8e5dc'); material.needsUpdate = true; },
