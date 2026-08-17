@@ -224,7 +224,7 @@ public class RealtimeMaterial : MonoBehaviour {
 }
 
 // REALTIME / UNITY / C#</pre></div>
-      <figure class="pager-unity-field" aria-hidden="true"><div class="pager-unity-halftone"><img src="./img/unity.png" alt=""></div></figure>
+      <figure class="pager-unity-field" aria-hidden="true"><div class="pager-unity-halftone"><img src="./img/unity.png" alt=""><video muted loop playsinline preload="metadata"><source src="./video/show.webm" type="video/webm"></video></div></figure>
       <div class="pager-stage" aria-labelledby="about-scroll-title">
         <p class="pager-stage__eyebrow" id="about-scroll-title">IDENTITY RECEIVER / PRESS TO REFRESH</p>
         <div class="identity-pager" id="identity-pager">
@@ -234,8 +234,8 @@ public class RealtimeMaterial : MonoBehaviour {
             <strong id="identity-pager-title">我是<br>空間體驗構建者</strong>
             <small id="identity-pager-subtitle">I AM A SPATIAL EXPERIENCE BUILDER</small>
             <div class="identity-pager__tools" id="identity-pager-tools" aria-label="Tools used">
-              <span><img src="./img/ue.svg" alt=""></span>
-              <span><img src="./img/unity.svg" alt=""></span>
+              <span><img src="./img/ue.webp" alt=""></span>
+              <span><img src="./img/unity.webp" alt=""></span>
             </div>
           </div>
           <button class="identity-pager__button identity-pager__button--prev" type="button" aria-label="Show previous identity"></button>
@@ -801,6 +801,11 @@ class StatementVortex {
   }
 }
 
+const siteLoader = document.querySelector('.site-loader');
+window.addEventListener('load', () => {
+  window.setTimeout(() => siteLoader?.classList.add('is-ready'), 720);
+}, { once: true });
+
 const statementVortex = document.querySelector('.statement-vortex');
 if (statementVortex) new StatementVortex(statementVortex);
 
@@ -810,38 +815,29 @@ if (identityPager) {
   const pagerBackdropVideo = pagerSection?.querySelector('.pager-unity-halftone video');
   const activatePagerBackdrop = () => {
     if (!pagerBackdropVideo || pagerSection?.classList.contains('is-pager-video-active')) return;
-    pagerSection?.classList.add('is-pager-video-active');
-    pagerBackdropVideo.play().catch(() => {});
+    const revealVideo = () => {
+      pagerSection?.classList.add('is-pager-video-active');
+      pagerBackdropVideo.play().catch(() => pagerSection?.classList.remove('is-pager-video-active'));
+    };
+    if (pagerBackdropVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      revealVideo();
+    } else {
+      pagerBackdropVideo.addEventListener('canplay', revealVideo, { once:true });
+      pagerBackdropVideo.load();
+    }
   };
   const messages = [
-    ['我是\\n空間體驗構建者', 'I AM A SPATIAL EXPERIENCE BUILDER', [['ue.svg', 'UE'], ['unity.svg', 'UNITY']]],
-    ['我是\\n技術型設計師', 'I AM A TECHNICAL DESIGNER', [['ps.svg', 'PS'], ['ai.svg', 'AI']]],
-    ['我是\\n新媒體敘事者', 'I AM A NEW MEDIA STORYTELLER', [['ae.svg', 'AE'], ['pr.svg', 'PR']]],
-    ['我是\\n互動原型創作者', 'I AM AN INTERACTION PROTOTYPER', [['c%23.svg', 'C#'], ['python.svg', 'PY']]],
-    ['我是\\n即時視覺系統創作者', 'I AM A REALTIME VISUAL SYSTEM MAKER', [['td.svg', 'TD'], ['td2.svg', 'TD']]],
-    ['我是\\n三維創作者', 'I AM A 3D GENERALIST', [['maya.svg', 'MAYA'], ['blender.svg', 'BLENDER']]],
+    ['我是\\n空間體驗構建者', 'I AM A SPATIAL EXPERIENCE BUILDER', [['ue.webp', 'UE'], ['unity.webp', 'UNITY']]],
+    ['我是\\n技術型設計師', 'I AM A TECHNICAL DESIGNER', [['ps.webp', 'PS'], ['ai.webp', 'AI']]],
+    ['我是\\n新媒體敘事者', 'I AM A NEW MEDIA STORYTELLER', [['ae.webp', 'AE'], ['pr.webp', 'PR']]],
+    ['我是\\n互動原型創作者', 'I AM AN INTERACTION PROTOTYPER', [['c.webp', 'C#'], ['python.webp', 'PY']]],
+    ['我是\\n即時視覺系統創作者', 'I AM A REALTIME VISUAL SYSTEM MAKER', [['td.webp', 'TD'], ['td2.webp', 'TD']]],
+    ['我是\\n三維創作者', 'I AM A 3D GENERALIST', [['maya.webp', 'MAYA'], ['blender.webp', 'BLENDER']]],
   ];
   const lcd = identityPager.querySelector('#identity-pager-lcd');
   const title = identityPager.querySelector('#identity-pager-title');
   const subtitle = identityPager.querySelector('#identity-pager-subtitle');
   const tools = identityPager.querySelector('#identity-pager-tools');
-  const pixelateToolIcons = () => {
-    tools.querySelectorAll('img').forEach((icon) => {
-      const rasterize = () => {
-        const canvas = document.createElement('canvas');
-        const pixels = 16;
-        canvas.width = pixels;
-        canvas.height = pixels;
-        const context = canvas.getContext('2d');
-        context.imageSmoothingEnabled = false;
-        context.drawImage(icon, 0, 0, pixels, pixels);
-        icon.src = canvas.toDataURL('image/png');
-        icon.classList.add('is-pixelated');
-      };
-      if (icon.complete && icon.naturalWidth) rasterize();
-      else icon.addEventListener('load', rasterize, { once: true });
-    });
-  };
   let messageIndex = 0;
   let messageTimer;
   const nextButton = identityPager.querySelector('.identity-pager__button--next');
@@ -859,11 +855,9 @@ if (identityPager) {
       title.innerHTML = cn.replace('\\n', '<br>');
       subtitle.textContent = en;
       tools.innerHTML = toolset.map(([file, label]) => `<span><img src="./img/${file}" alt="${label}"></span>`).join('');
-      pixelateToolIcons();
       lcd.classList.remove('is-flashing');
     }, 105);
   };
-  pixelateToolIcons();
   nextButton.addEventListener('click', () => {
     activatePagerBackdrop();
     nextButton.classList.remove('is-alert');
