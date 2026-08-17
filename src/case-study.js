@@ -324,9 +324,25 @@ if (useLabCorridor && projectId === '5') {
   gallery.innerHTML = '<div class="lab-corridor" data-lab-corridor><canvas aria-label="实验室作品图像走廊"></canvas><p>EXPERIMENTAL ARCHIVE / 14 STUDIES</p><small>MOVE TO LOOK AROUND</small></div>';
   dots.innerHTML = '';
   galleryCaption.textContent = '';
-  const mountLabCorridor = () => startLabCorridor(gallery.querySelector('[data-lab-corridor]'));
+  let labMounted = false;
+  const mountLabCorridor = () => {
+    if (labMounted) return;
+    labMounted = true;
+    const root = gallery.querySelector('[data-lab-corridor]');
+    try {
+      if (window.THREE) startLabCorridor(root);
+      else startLabCanvasFallback(root);
+    } catch (error) {
+      console.warn('Lab corridor WebGL fallback:', error);
+      root.replaceChildren(Object.assign(document.createElement('canvas'), { ariaLabel:'实验室作品图像走廊' }));
+      startLabCanvasFallback(root);
+    }
+  };
   if (window.THREE) mountLabCorridor();
-  else window.addEventListener('three-ready', mountLabCorridor, { once:true });
+  else {
+    window.addEventListener('three-ready', mountLabCorridor, { once:true });
+    window.setTimeout(mountLabCorridor, 900);
+  }
 } else {
 // One dedicated 12-frame sequence per project. Add images as img/{projectId}/1.webp … 12.webp.
   gallery.innerHTML = frameLabels.map((label, index) => `<button class="cover-card" type="button" data-card="${index}" aria-label="查看 ${label}"><img src="./img/${projectId}/${index + 1}.webp" alt="${project.title} ${label}"></button>`).join('');
@@ -414,7 +430,7 @@ function startLabCorridor(root) {
   scene.add(makeLines(orangePoints, '#ec633d', .64));
 
   const loader = new THREE.TextureLoader();
-  const paper = new THREE.MeshBasicMaterial({ color:'#eeece3', side:THREE.DoubleSide });
+  const paper = new THREE.LineBasicMaterial({ color:'#eeece3', transparent:true, opacity:.88 });
   const panelGeometry = new THREE.PlaneGeometry(1.58, 1.58);
   const frameGeometry = new THREE.EdgesGeometry(panelGeometry);
   for (let i = 0; i < 64; i += 1) {
@@ -482,7 +498,7 @@ function startLabCorridor(root) {
 function startLabCanvasFallback(root) {
   const canvas = root.querySelector('canvas');
   const ctx = canvas.getContext('2d');
-  const images = Array.from({ length:10 }, (_, index) => {
+  const images = Array.from({ length:14 }, (_, index) => {
     const image = new Image();
     image.src = `./img/5/${index + 1}.webp`;
     return image;
