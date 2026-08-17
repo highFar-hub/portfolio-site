@@ -1,24 +1,49 @@
-# H/F Portfolio — GitHub Pages package
+# H/F — 技术型设计师作品集
 
-This folder is the ready-to-upload static version of the portfolio. Upload **the contents of this folder** to the root of the `highFar-hub/portfolio-site` repository.
+**NEW MEDIA / SPATIAL SYSTEMS**  
+一个关于身体、空间、实时系统与生成式叙事的个人作品集。
 
-## Upload with GitHub Desktop (recommended)
+我关注技术如何成为体验材料：从手势、语音、脑电等输入出发，将代码、影像、三维与空间感知组织为能够被身体参与的互动系统。
 
-This package has more than 100 files, so GitHub Desktop is much easier than browser upload.
+访问作品集：<https://highFar-hub.github.io/portfolio-site/>
 
-1. In GitHub Desktop, choose **File → Clone repository**, select `highFar-hub/portfolio-site`, and choose any local destination.
-2. Open the cloned folder in Explorer. Copy the **contents** of this package into that folder and allow overwrite when prompted.
-3. Return to GitHub Desktop. Enter a summary such as `Publish portfolio`, click **Commit to main**, then **Push origin**.
+## 精选作品
 
-## Enable GitHub Pages
+### 01 / 既成态 · VR 科普交互体验
 
-1. Open `https://github.com/highFar-hub/portfolio-site` and go to **Settings → Pages**.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch **main** and folder **/(root)**, then click **Save**.
-4. GitHub will publish it in a few minutes at `https://highFar-hub.github.io/portfolio-site/`.
+基于 Unity 与 SteamVR 开发的沉浸式植物化石研究叙事。包含手部抓取、实体开关、区域触发 NPC、黑板涂写与植物扫描等交互。
 
-## Intentional omission
+### 02 / 星洄 · AI 手势与语音互动装置
 
-`video/show.webm` is not included because it is 100.11 MiB, over GitHub's 100 MiB single-file upload limit. The identity pager therefore keeps its image background in this package.
+将 MediaPipe 手势识别、天气 API、语音转写、语言大模型与 ComfyUI 串联为可实时响应的大屏体验。
 
-To restore that click-to-play background later, either compress `show.webm` below 100 MiB and place it at `video/show.webm`, or host it in Tencent COS and update the video URL in `script.js`.
+### 03 / 脉合五境 · 脑电反馈 × 双屏生成式互动
+
+以黄河“几字弯”的五处文化转折为叙事线索。手势推动五境影像，脑电信号驱动粒子反馈、生成参数与双屏内容变化。
+
+### 04 / 洄声 · AR 空间声音交互
+
+将声音转化为可在现实场域中靠近、触发与追随的增强现实体验。
+
+### 05 / 小型实验室 · MINI INTERACTIONS / 3D STUDIES
+
+持续积累的互动原型、三维研究与视觉实验档案。
+
+## 技术与方法
+
+- Unity / SteamVR / C# 实时交互开发
+- MediaPipe 手势识别与动作触发
+- EEG 脑电输入、数据映射与实时可视化
+- ComfyUI、LLM 与生成式图像工作流
+- XR / AR 空间叙事与三维场景制作
+- TouchDesigner、Unreal Engine、Python 等创意技术探索
+
+## 联系方式
+
+- WeChat：`highFar0`
+- Email：[dhdd40@163.com](mailto:dhdd40@163.com)
+- Tel：`18369923710`
+
+---
+
+© 2026 H/F — ALL SYSTEMS ACTIVE
