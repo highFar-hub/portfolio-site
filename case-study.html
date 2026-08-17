@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f2ea" />
+    <title>H/F — Case Study</title>
+    <link rel="stylesheet" crossorigin href="./assets/caseStudy-Dvd8TrPl.css">
+  </head>
+  <body>
+    <main class="case-page" id="case-page">
+      <header class="case-header">
+        <a class="case-back" id="case-back" href="./index.html#work">← BACK TO WORK</a>
+        <p>H/F / PROJECT ARCHIVE</p>
+        <span id="case-index">01 / 05</span>
+      </header>
+
+      <section class="case-hero" aria-labelledby="case-title">
+        <canvas class="case-birds" id="case-birds" aria-hidden="true"></canvas>
+        <div class="case-hero__grid" aria-hidden="true"></div>
+        <p class="case-kicker">作品档案 / <span id="case-kicker">VR SCIENCE INTERACTION</span></p>
+        <h1 id="case-title">既成態</h1>
+        <p class="case-deck" id="case-deck"></p>
+        <dl class="case-meta">
+          <div><dt>形式 / FORMAT</dt><dd id="case-format"></dd></div>
+          <div><dt>年份 / YEAR</dt><dd>2026</dd></div>
+          <div><dt>角色 / ROLE</dt><dd id="case-role"></dd></div>
+        </dl>
+        <a class="case-film" id="case-film" href="./film.html?project=1">观看影像 / WATCH FILM ↗</a>
+      </section>
+
+      <section class="case-section case-statement">
+        <p class="section-label">01 / 创作思路 · CREATIVE THOUGHT</p>
+        <h2 id="case-thought-title"></h2>
+        <p id="case-thought"></p>
+      </section>
+
+      <section class="case-section case-system">
+        <div><p class="section-label">02 / 技术解析 · SYSTEM MAP</p><h2>技术<br>解析</h2></div>
+        <ol id="case-tech" class="tech-list"></ol>
+      </section>
+
+      <section class="case-section case-role">
+        <p class="section-label">03 / 负责内容 · CONTRIBUTION</p>
+        <div class="role-layout"><h2>我的<br>负责内容</h2><ul id="case-responsibilities"></ul></div>
+      </section>
+
+      <section class="case-section case-gallery" aria-labelledby="gallery-title">
+        <div class="gallery-heading"><p class="section-label">04 / 创作截图 · PROCESS FRAMES</p><h2 id="gallery-title">视觉<br>预览</h2><p>点击左右按钮切换图片 / USE ARROWS TO BROWSE</p></div>
+        <div class="coverflow-shell"><button class="coverflow-nav coverflow-prev" id="coverflow-prev" type="button" aria-label="上一张图片">←</button><div id="coverflow" class="coverflow" aria-label="Project image preview gallery"></div><button class="coverflow-nav coverflow-next" id="coverflow-next" type="button" aria-label="下一张图片">→</button></div>
+        <div class="gallery-footer"><p id="gallery-caption"></p><div id="gallery-dots" class="gallery-dots" aria-label="图片序号"></div></div>
+      </section>
+
+      <section class="case-next">
+        <p class="section-label">档案结束 / NEXT SIGNAL</p>
+        <a id="case-next" href="#"><span>下一个作品 / NEXT PROJECT</span><strong></strong><i>↘</i></a>
+      </section>
+    </main>
+    <script defer src="./vendor/gsap/gsap.min.js"></script>
+    <script defer src="./vendor/gsap/Draggable.min.js"></script>
+    <script defer src="./vendor/gsap/InertiaPlugin.min.js"></script>
+    <script defer src="./src/lab-gallery.js"></script>
+    <script defer src="./src/case-study.js"></script>
+  </body>
+</html>

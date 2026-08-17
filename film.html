@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#11110f" />
+    <title>H/F — Project Film</title>
+    <link rel="stylesheet" crossorigin href="./assets/film-D7w0y3oP.css">
+  </head>
+  <body>
+    <main class="film-page">
+      <header class="film-header">
+        <a class="film-back" id="film-back" href="./index.html#work">← BACK TO WORK</a>
+        <p>作品影像 / PROJECT FILM</p>
+        <span id="film-index">01 / 04</span>
+      </header>
+      <section class="film-stage" aria-labelledby="film-title">
+        <div class="film-stage__ruler film-stage__ruler--left" aria-hidden="true"></div>
+        <div class="film-stage__ruler film-stage__ruler--right" aria-hidden="true"></div>
+        <div class="film-meta"><p id="film-label">作品影像 / PROJECT FILM</p><p id="film-subtitle"></p><h1 id="film-title">既成态</h1></div>
+        <div class="film-player-wrap">
+          <video id="film-player" controls playsinline preload="metadata" controlslist="nodownload" aria-label="Project film player">你的瀏覽器不支援 HTML5 影片播放。</video>
+          <p class="film-loading" id="film-loading">CONNECTING TO VIDEO SOURCE / 00%</p>
+          <span class="film-corner film-corner--tl" aria-hidden="true"></span><span class="film-corner film-corner--br" aria-hidden="true"></span>
+        </div>
+        <div class="film-footer"><p>观看 / 返回 / 继续探索</p><a id="film-case" href="./case-study.html?project=1">查看项目 / VIEW CASE STUDY ↗</a><p>影像由 COS 对象存储提供</p></div>
+      </section>
+    </main>
+    <script defer src="./src/film.js"></script>
+  </body>
+</html>
