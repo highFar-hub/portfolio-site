@@ -224,7 +224,7 @@ public class RealtimeMaterial : MonoBehaviour {
 }
 
 // REALTIME / UNITY / C#</pre></div>
-      <figure class="pager-unity-field" aria-hidden="true"><div class="pager-unity-halftone"><img src="./img/unity.png" alt=""><video muted loop playsinline preload="metadata"><source src="./video/show.webm" type="video/webm"></video></div></figure>
+      <figure class="pager-unity-field" aria-hidden="true"><div class="pager-unity-halftone"><img src="./img/unity.png" alt=""><video muted loop playsinline preload="metadata"><source src="./video/show.mp4" type="video/mp4"></video></div></figure>
       <div class="pager-stage" aria-labelledby="about-scroll-title">
         <p class="pager-stage__eyebrow" id="about-scroll-title">IDENTITY RECEIVER / PRESS TO REFRESH</p>
         <div class="identity-pager" id="identity-pager">
@@ -802,9 +802,10 @@ class StatementVortex {
 }
 
 const siteLoader = document.querySelector('.site-loader');
-window.addEventListener('load', () => {
-  window.setTimeout(() => siteLoader?.classList.add('is-ready'), 720);
-}, { once: true });
+const dismissSiteLoader = () => siteLoader?.classList.add('is-ready');
+// Do not wait for large background media: it can remain loading after the page is usable.
+window.setTimeout(dismissSiteLoader, 720);
+window.addEventListener('load', dismissSiteLoader, { once: true });
 
 const statementVortex = document.querySelector('.statement-vortex');
 if (statementVortex) new StatementVortex(statementVortex);
