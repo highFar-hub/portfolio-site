@@ -316,33 +316,15 @@ const frameLabels = ['概念草图 / CONCEPT','叙事结构 / NARRATIVE','系统
 const frameDescriptions = ['从问题与叙事关系出发，确认作品最初的体验方向。','梳理信息、角色与体验节奏之间的关系。','把输入、反馈与输出拆解成可测试的实时系统。','记录观众进入系统后的触发、停留与反馈状态。','在真实展示环境中校准空间、画面与观看距离。','观察装置、身体与环境之间的即时关系。','保留画面在不同参数下的视觉变化。','测试动态反馈如何回应观众动作。','校准界面信息在实际体验中的可读性。','记录建模、材质与实时渲染的取舍。','保留迭代中的版本、失败样本与下一步假设。','汇总完成版本与后续可继续发展的线索。'];
 const dots = document.querySelector('#gallery-dots');
 const galleryCaption = document.querySelector('#gallery-caption');
-// Project 05 uses a self-contained Three.js corridor with local project imagery.
+// Project 05 uses the local DOM + GSAP archive gallery.
 const useLabCorridor = true;
 if (useLabCorridor && projectId === '5') {
   document.body.classList.add('case-page--lab');
   gallerySection.classList.add('case-gallery--lab');
-  gallery.innerHTML = '<div class="lab-corridor" data-lab-corridor><canvas aria-label="实验室作品图像走廊"></canvas><p>EXPERIMENTAL ARCHIVE / 14 STUDIES</p><small>MOVE TO LOOK AROUND</small></div>';
+  gallery.innerHTML = '<div class="infinite-lab" data-lab-gallery></div>';
   dots.innerHTML = '';
   galleryCaption.textContent = '';
-  let labMounted = false;
-  const mountLabCorridor = () => {
-    if (labMounted) return;
-    labMounted = true;
-    const root = gallery.querySelector('[data-lab-corridor]');
-    try {
-      if (window.THREE) startLabCorridor(root);
-      else startLabCanvasFallback(root);
-    } catch (error) {
-      console.warn('Lab corridor WebGL fallback:', error);
-      root.replaceChildren(Object.assign(document.createElement('canvas'), { ariaLabel:'实验室作品图像走廊' }));
-      startLabCanvasFallback(root);
-    }
-  };
-  if (window.THREE) mountLabCorridor();
-  else {
-    window.addEventListener('three-ready', mountLabCorridor, { once:true });
-    window.setTimeout(mountLabCorridor, 900);
-  }
+  window.LabGallery?.mount(gallery.querySelector('[data-lab-gallery]'));
 } else {
 // One dedicated 12-frame sequence per project. Add images as img/{projectId}/1.webp … 12.webp.
   gallery.innerHTML = frameLabels.map((label, index) => `<button class="cover-card" type="button" data-card="${index}" aria-label="查看 ${label}"><img src="./img/${projectId}/${index + 1}.webp" alt="${project.title} ${label}"></button>`).join('');

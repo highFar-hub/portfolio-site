@@ -21,7 +21,7 @@
     startVortex(vortex, root);
 
     const formats = [[300,190],[190,280],[250,250],[320,180],[210,300],[280,220],[180,260],[300,210],[235,235],[270,170]];
-    const count = 48, cols = 8, rows = 6;
+    const count = 56, cols = 8, rows = 7;
     let viewW = 1, viewH = 1, worldW = 1, worldH = 1;
     let camX = 0, camY = 0, targetX = 0, targetY = 0, velocityX = 0, velocityY = 0;
     let dragging = false, entering = false, revealed = false, settleUntil = 0, lastX = 0, lastY = 0, zoom = .72, spin = 0;
@@ -30,7 +30,7 @@
     for (let index = 0; index < count; index += 1) {
       const [w, h] = formats[index % formats.length];
       const tile = document.createElement('figure'); tile.className = 'infinite-lab__tile'; tile.style.width = `${w}px`; tile.style.height = `${h}px`;
-      const image = document.createElement('img'); image.src = `./img/5/${(index % 10) + 1}.webp`; image.alt = `实验室图像 ${(index % 10) + 1}`; image.draggable = false;
+      const image = document.createElement('img'); image.src = `./img/5/${(index % 14) + 1}.webp`; image.alt = `实验室图像 ${(index % 14) + 1}`; image.draggable = false;
       tile.append(image); world.append(tile);
       const tileData = { el:tile, image, x:0, y:0, w, h, sphere:spheres[index] };
       image.addEventListener('load', () => {
