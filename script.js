@@ -224,7 +224,7 @@ public class RealtimeMaterial : MonoBehaviour {
 }
 
 // REALTIME / UNITY / C#</pre></div>
-      <figure class="pager-unity-field" aria-hidden="true"><div class="pager-unity-halftone"><img src="./img/unity.png" alt=""><video muted loop playsinline preload="metadata"><source src="./video/show.mp4" type="video/mp4"></video></div></figure>
+      <figure class="pager-unity-field" aria-hidden="true"><div class="pager-unity-halftone"><img src="./img/unity.png" alt=""><video muted loop playsinline preload="auto"><source src="./video/show.mp4" type="video/mp4"></video></div></figure>
       <div class="pager-stage" aria-labelledby="about-scroll-title">
         <p class="pager-stage__eyebrow" id="about-scroll-title">IDENTITY RECEIVER / PRESS TO REFRESH</p>
         <div class="identity-pager" id="identity-pager">
@@ -814,6 +814,8 @@ const identityPager = document.querySelector('#identity-pager');
 if (identityPager) {
   const pagerSection = identityPager.closest('.about-scroll');
   const pagerBackdropVideo = pagerSection?.querySelector('.pager-unity-halftone video');
+  // Buffer the small background film while the visitor explores the page.
+  pagerBackdropVideo?.load();
   const activatePagerBackdrop = () => {
     if (!pagerBackdropVideo || pagerSection?.classList.contains('is-pager-video-active')) return;
     const revealVideo = () => {
