@@ -148,7 +148,7 @@ if (projectId === '1' && systemSection && roleSection) {
     <div class="case-story-film" data-story-film>
       <img class="story-film__cover" src="./img/vr show.webp" alt="既成态全流程演示封面">
       <p class="story-film__label">全流程展示 / FULL WALKTHROUGH</p>
-      <video muted playsinline preload="none" data-src="https://projectvideo-1352974734.cos.ap-beijing.myqcloud.com/vr%20show.mp4"></video>
+      <video muted playsinline preload="none" data-src="https://pub-3e8e8a8073094e69a19dcfcc4e000ea1.r2.dev/vr_show.mp4"></video>
       <button class="story-film__open" type="button" aria-label="播放完整作品演示"><img src="./img/play.svg" alt=""><small>PLAY FULL WALKTHROUGH</small></button>
     </div>
   `);

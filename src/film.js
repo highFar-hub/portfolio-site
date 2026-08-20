@@ -1,8 +1,8 @@
 const films = {
-  1: { title:'既成态', subtitle:'VR SCIENCE INTERACTION / PROJECT FILM 01', source:'https://projectvideo-1352974734.cos.ap-beijing.myqcloud.com/1.mp4' },
-  2: { title:'星洄', subtitle:'AI GESTURE + VOICE / PROJECT FILM 02', source:'https://projectvideo-1352974734.cos.ap-beijing.myqcloud.com/2.mp4' },
-  3: { title:'脉合五境', subtitle:'AIGC + EEG INTERACTION / PROJECT FILM 03', source:'https://projectvideo-1352974734.cos.ap-beijing.myqcloud.com/3.mp4' },
-  4: { title:'洄声', subtitle:'AR INTERACTION / PROJECT FILM 04', source:'https://projectvideo-1352974734.cos.ap-beijing.myqcloud.com/4.mp4' },
+  1: { title:'既成态', subtitle:'VR SCIENCE INTERACTION / PROJECT FILM 01', source:'https://pub-3e8e8a8073094e69a19dcfcc4e000ea1.r2.dev/1.mp4' },
+  2: { title:'星洄', subtitle:'AI GESTURE + VOICE / PROJECT FILM 02', source:'https://pub-3e8e8a8073094e69a19dcfcc4e000ea1.r2.dev/2.mp4' },
+  3: { title:'脉合五境', subtitle:'AIGC + EEG INTERACTION / PROJECT FILM 03', source:'https://pub-3e8e8a8073094e69a19dcfcc4e000ea1.r2.dev/3.mp4' },
+  4: { title:'洄声', subtitle:'AR INTERACTION / PROJECT FILM 04', source:'https://pub-3e8e8a8073094e69a19dcfcc4e000ea1.r2.dev/4.mp4' },
 };
 const requestedProject = new URLSearchParams(location.search).get('project');
 const projectId = films[requestedProject] ? requestedProject : '1';
